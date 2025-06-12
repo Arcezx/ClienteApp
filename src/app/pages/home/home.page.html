@@ -1,0 +1,160 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center" style="font-weight:bold;font-size:1.4rem;letter-spacing:1px;">
+      ✈️ -ARCEFLY- ✈️
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2 class="ion-text-center">Buscar un vuelo</h2>
+
+  <!-- Formulario de búsqueda -->
+  <ion-card class="search-card">
+    <ion-card-content>
+      <ion-item class="form-item">
+        <ion-label position="floating">Origen</ion-label>
+        <ion-input [(ngModel)]="busqueda.origen"></ion-input>
+      </ion-item>
+
+      <ion-item class="form-item">
+        <ion-label position="floating">Destino</ion-label>
+        <ion-input [(ngModel)]="busqueda.destino"></ion-input>
+      </ion-item>
+
+      <ion-item class="date-selector">
+        <ion-label position="stacked">Fechas de viaje</ion-label>
+        <ion-button fill="outline" (click)="abrirSelectorFechas()" expand="block">
+          <ion-icon name="calendar-outline" slot="start"></ion-icon>
+          <span>{{getFechaTexto()}}</span>
+        </ion-button>
+      </ion-item>
+
+      <ion-button expand="block" color="primary" (click)="buscarVuelos()">
+        Buscar vuelos
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Modal de selección de fechas -->
+  <ion-modal [isOpen]="mostrarSelectorFechas" (didDismiss)="mostrarSelectorFechas = false">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Seleccionar fechas</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="mostrarSelectorFechas = false">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-datetime 
+          presentation="date"
+          [multiple]="true"
+          [(ngModel)]="fechasSeleccionadas"
+          (ionChange)="seleccionarRangoFechas()"
+          [min]="fechaHoy"
+          [max]="fechaMaxima">
+        </ion-datetime>
+        <ion-button expand="block" (click)="mostrarSelectorFechas = false">Aplicar</ion-button>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- Sección de destinos populares -->
+  <div class="inspiracion-container">
+    <ion-list-header class="header-destinos">
+      <ion-label>Inspírate para tu próximo destino</ion-label>
+    </ion-list-header>
+    
+    <div class="scroll-container">
+      <div class="scroll-content">
+        <ion-card class="destino-card" *ngFor="let destino of destinosPopulares">
+          <div class="card-content" (click)="abrirModalDestino(destino)">
+            <div class="image-container">
+              <img [src]="destino.imagen" [alt]="destino.nombre" class="destino-image"/>
+              <div class="overlay"></div>
+              <div class="destino-header">
+                <h3 class="destino-title">{{destino.nombre}}</h3>
+                <p class="destino-subtitle">{{truncateText(destino.descripcion, 80)}}</p>
+              </div>
+            </div>
+          </div>
+          
+          <ion-button 
+            expand="block" 
+            fill="clear" 
+            color="light"
+            (click)="regresar(); $event.stopPropagation()"
+            class="back-button">
+            <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+            Regresar
+          </ion-button>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para detalles del destino -->
+  <ion-modal [isOpen]="mostrarModalDestino" (didDismiss)="cerrarModalDestino()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-buttons slot="start">
+            <ion-button (click)="cerrarModalDestino()" strong>
+              <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <ion-title>{{destinoSeleccionado?.nombre}}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding modal-content">
+        <div class="destino-detalle">
+          <img [src]="destinoSeleccionado?.imagen" [alt]="destinoSeleccionado?.nombre" class="imagen-destino"/>
+          
+          <div class="descripcion-destino">
+            <h2>{{destinoSeleccionado?.nombre}}</h2>
+            <p>{{destinoSeleccionado?.descripcion}}</p>
+            
+            <div class="atracciones-container">
+              <h3>Atracciones principales:</h3>
+              <div class="tags-container">
+                <span class="tag" *ngFor="let atraccion of getAtraccionesArray(destinoSeleccionado?.atracciones)">{{atraccion}}</span>
+              </div>
+            </div>
+            
+            <!-- Botón grande para cerrar el modal -->
+            <ion-button 
+              expand="block" 
+              color="medium" 
+              fill="outline"
+              (click)="cerrarModalDestino()"
+              class="close-button">
+              <ion-icon name="exit-outline" slot="start"></ion-icon>
+              Regresar
+            </ion-button>
+          </div>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+<!-- Footer -->
+<ion-footer>
+  <ion-toolbar>
+    <ion-segment value="inicio" mode="md">
+      <ion-segment-button value="inicio" (click)="navigateTo('/inicio')">
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="reservas" (click)="navigateTo('/reservas')">
+        <ion-icon name="airplane-outline"></ion-icon>
+        <ion-label>Reservas</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="perfil" (click)="navigateTo('/perfil')">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>

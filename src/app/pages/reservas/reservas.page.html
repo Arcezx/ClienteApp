@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()" fill="clear">
+        <ion-icon slot="icon-only" name="arrow-back-outline" color="light"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Mis Reservas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Spinner de carga -->
+  <div *ngIf="cargando" class="loading-container">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p>Cargando tus reservas...</p>
+  </div>
+
+  <!-- Lista de reservas -->
+  <ion-list *ngIf="!cargando" class="reservas-list">
+    <!-- Mensaje cuando no hay reservas -->
+    <div *ngIf="reservas.length === 0" class="no-reservas">
+      <ion-icon name="airplane-outline"></ion-icon>
+      <h3>No tienes reservas</h3>
+      <ion-button fill="outline" (click)="router.navigate(['/home'])">
+        Buscar vuelos
+      </ion-button>
+    </div>
+
+    <!-- Items de reserva simplificados -->
+    <ion-item *ngFor="let reserva of reservas" class="reserva-item">
+      <ion-label>
+        <div class="ruta">
+          <strong>{{reserva.origen}} → {{reserva.destino}}</strong>
+        </div>
+        <div class="detalle">
+          <span class="label">Asiento:</span> {{reserva.asiento || 'Por asignar'}}
+        </div>
+      </ion-label>
+      <div class="estado-container">
+        <ion-badge [color]="reserva.estado === 'CONFIRMADA' ? 'success' : 'warning'">
+          {{reserva.estado || 'PENDIENTE'}}
+        </ion-badge>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

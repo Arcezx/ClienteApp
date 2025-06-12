@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/vuelos"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Confirmar reserva</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-card *ngIf="vuelo">
+    <ion-card-header>
+      <ion-card-title>{{ vuelo.origen }} → {{ vuelo.destino }}</ion-card-title>
+      <ion-card-subtitle>
+        {{ vuelo.fechaSalida | date:'dd MMM, y' }}
+        <span *ngIf="vuelo.fechaRegreso">
+          &nbsp;·&nbsp; Regreso {{ vuelo.fechaRegreso | date:'dd MMM, y' }}
+        </span>
+      </ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label>Clase</ion-label>
+          <ion-text>{{ vuelo.clase || 'Económica' }}</ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Asiento sugerido</ion-label>
+          <ion-badge color="medium">{{ asiento }}</ion-badge>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button
+    expand="block"
+    color="success"
+    [disabled]="cargando"
+    (click)="confirmarReserva()">
+    <ion-spinner slot="start" *ngIf="cargando" name="crescent"></ion-spinner>
+    Confirmar reserva
+  </ion-button>
+
+</ion-content>

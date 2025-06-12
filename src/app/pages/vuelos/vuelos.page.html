@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Resultados de vuelos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Mensaje contextual -->
+  <div *ngIf="mensaje" class="mensaje-contextual">
+    <ion-icon name="information-circle" color="primary"></ion-icon>
+    <p>{{mensaje}}</p>
+  </div>
+
+  <!-- Lista de vuelos -->
+  <div *ngIf="vuelos.length > 0" class="flight-results">
+    <h2 class="section-title">
+      <ion-icon name="airplane" color="primary"></ion-icon>
+      {{tipoBusqueda === 'exactos' ? 'Vuelos disponibles' : 'Otras opciones disponibles'}}
+    </h2>
+    
+    <div class="flight-cards">
+      <ion-card *ngFor="let vuelo of vuelos" class="flight-card">
+        <div class="card-header">
+          <div class="route">
+            <div class="city origin">{{vuelo.origen}}</div>
+            <div class="flight-icon">
+              <ion-icon name="airplane"></ion-icon>
+            </div>
+            <div class="city destination">{{vuelo.destino}}</div>
+          </div>
+          
+          <div class="flight-type" [class.round-trip]="vuelo.fechaRegreso">
+            <ion-icon [name]="vuelo.fechaRegreso ? 'sync' : 'arrow-redo'"></ion-icon>
+            <span>{{vuelo.fechaRegreso ? 'IDA Y VUELTA' : 'SOLO IDA'}}</span>
+          </div>
+        </div>
+
+        <div class="flight-details">
+          <div class="dates">
+            <div class="date-item departure">
+              <div class="label">SALIDA</div>
+              <div class="date">{{vuelo.fechaSalida | date:'dd MMM'}}</div>
+              <div class="time">{{vuelo.horaSalida}}</div>
+            </div>
+            
+            <div class="date-item return" *ngIf="vuelo.fechaRegreso">
+              <div class="label">REGRESO</div>
+              <div class="date">{{vuelo.fechaRegreso | date:'dd MMM'}}</div>
+              <div class="time">{{vuelo.horaRegreso || '--:--'}}</div>
+            </div>
+          </div>
+
+          <div class="price-section">
+            <div class="price">{{vuelo.precio | currency:'EUR':'symbol':'1.0-0'}}</div>
+            <ion-button fill="solid" color="primary" (click)="reservar(vuelo)">
+              Reservar
+            </ion-button>
+          </div>
+        </div>
+      </ion-card>
+    </div>
+  </div>
+
+  <!-- Sin resultados -->
+  <div *ngIf="vuelos.length === 0" class="no-results">
+    <div class="illustration">
+      <ion-icon name="airplane-outline"></ion-icon>
+    </div>
+    <h3>No hay vuelos disponibles</h3>
+    <p>No encontramos vuelos que coincidan con tu búsqueda</p>
+    <ion-button expand="block" fill="outline" (click)="navegarAHome()">
+      Nueva búsqueda
+    </ion-button>
+  </div>
+</ion-content>

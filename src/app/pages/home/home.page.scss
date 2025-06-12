@@ -1,0 +1,287 @@
+ion-content {
+  --background: #f4f7fc;
+  font-family: 'Segoe UI', sans-serif;
+  --padding-bottom: 16px;
+}
+
+h2 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #003366;
+  margin: 1rem 0;
+}
+
+.search-card {
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 51, 102, 0.1);
+  margin-bottom: 2rem;
+  
+  ion-card-title {
+    font-size: 1.3rem;
+    color: #003366;
+  }
+}
+
+.form-item {
+  --border-radius: 8px;
+  margin-bottom: 16px;
+  
+  ion-label[position="floating"] {
+    color: #666;
+  }
+}
+
+.date-selector {
+  --border-radius: 8px;
+  margin-bottom: 24px;
+  
+  ion-label {
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--ion-color-dark);
+    transform: none !important;
+  }
+  
+  ion-button {
+    --border-width: 1px;
+    --border-color: var(--ion-color-medium);
+    --border-style: solid;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    height: 48px;
+    margin-top: 4px;
+    
+    ion-icon {
+      margin-right: 8px;
+    }
+  }
+}
+
+.search-button {
+  margin-top: 8px;
+  --border-radius: 12px;
+}
+
+.inspiracion-container {
+  margin: 2rem 0;
+  
+  .header-destinos {
+    ion-label {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--ion-color-dark);
+      letter-spacing: 0.5px;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 15px;
+  -webkit-overflow-scrolling: touch;
+  
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--ion-color-medium);
+    border-radius: 3px;
+  }
+}
+
+.scroll-content {
+  display: inline-flex;
+  gap: 16px;
+  padding: 0 16px;
+}
+
+.destino-card {
+  min-width: 280px;
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: white;
+  position: relative;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+  }
+  
+  .card-content {
+    height: 100%;
+  }
+  
+  .image-container {
+    position: relative;
+    height: 180px;
+    width: 100%;
+    overflow: hidden;
+    
+    .destino-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+  
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+    }
+    
+    .destino-header {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px;
+      color: white;
+      
+      .destino-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: white;
+      }
+    
+      .destino-subtitle {
+        font-size: 0.95rem;
+        line-height: 1.4;
+        margin: 0;
+        color: rgba(255,255,255,0.9);
+      }
+    }
+  }
+  
+  .back-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 10;
+  --background: rgba(255, 255, 255, 0.8);
+  --color: #000000; 
+    --border-radius: 20px;
+    --padding-start: 8px;
+    --padding-end: 8px;
+    margin: 0;
+    height: 32px;
+    
+    ion-icon {
+      font-size: 16px;
+      margin-right: 5px;
+    }
+  }
+}
+
+.modal-content {
+  --background: #f5f5f5;
+}
+
+.destino-detalle {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+  .imagen-destino {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .descripcion-destino {
+    h2 {
+      color: #003366;
+      margin-bottom: 16px;
+      font-size: 1.8rem;
+    }
+    
+    p {
+      color: #333;
+      margin-bottom: 16px;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+    
+    .atracciones-container {
+      margin-bottom: 24px;
+      
+      h3 {
+        color: #003366;
+        margin-bottom: 12px;
+        font-size: 1.2rem;
+      }
+      
+      .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        
+        .tag {
+          background: #e1f0ff;
+          color: #0066cc;
+          padding: 6px 12px;
+          border-radius: 20px;
+          font-size: 0.85rem;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .destino-card {
+    min-width: 240px;
+    
+    .image-container {
+      height: 160px;
+    }
+  }
+  
+  .destino-detalle {
+    padding: 12px;
+    
+    .imagen-destino {
+      height: 160px;
+    }
+    
+    .descripcion-destino {
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+ion-footer {
+  --background: #ffffff;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  
+  ion-segment {
+    --background: transparent;
+    
+    ion-segment-button {
+      --color: var(--ion-color-medium);
+      --color-checked: var(--ion-color-primary);
+      --indicator-color: transparent;
+      
+      ion-icon {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

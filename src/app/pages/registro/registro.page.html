@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="router.navigate(['/login'])">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Registro de Cliente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="registroForm" (ngSubmit)="registrar()">
+    <!-- Nombre -->
+    <ion-item>
+      <ion-label position="floating">Nombre Completo</ion-label>
+      <ion-input formControlName="nombre" type="text"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched" color="danger">
+      Nombre requerido (mínimo 3 caracteres)
+    </ion-note>
+
+    <!-- Email -->
+    <ion-item>
+      <ion-label position="floating">Correo Electrónico</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="registroForm.get('email')?.invalid && registroForm.get('email')?.touched" color="danger">
+      Por favor ingresa un email válido
+    </ion-note>
+
+    <!-- Contraseña -->
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input formControlName="password" type="password"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="registroForm.get('password')?.invalid && registroForm.get('password')?.touched" color="danger">
+      Contraseña requerida (mínimo 6 caracteres)
+    </ion-note>
+
+    <!-- Confirmar Contraseña -->
+    <ion-item>
+      <ion-label position="floating">Confirmar Contraseña</ion-label>
+      <ion-input formControlName="confirmPassword" type="password"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="registroForm.hasError('notSame') && registroForm.get('confirmPassword')?.touched" color="danger">
+      Las contraseñas no coinciden
+    </ion-note>
+
+    <!-- Tipo de Cliente (Oculto, valor por defecto) -->
+    <ion-input formControlName="tipo" type="hidden"></ion-input>
+
+    <!-- Botón de Registro -->
+    <ion-button expand="block" type="submit" [disabled]="registroForm.invalid || cargando" class="ion-margin-top">
+      <ion-spinner *ngIf="cargando" name="crescent"></ion-spinner>
+      <span *ngIf="!cargando">Registrarse</span>
+    </ion-button>
+  </form>
+
+  <div class="login-link ion-text-center ion-margin-top">
+    <p>¿Ya tienes una cuenta? <a (click)="router.navigate(['/login'])">Inicia sesión</a></p>
+  </div>
+</ion-content>

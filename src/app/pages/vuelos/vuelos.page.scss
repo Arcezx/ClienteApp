@@ -1,0 +1,253 @@
+/* Variables de color */
+:root {
+  --ion-color-primary: #3880ff;
+  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #3171e0;
+  --ion-color-primary-tint: #4c8dff;
+
+  --ion-color-secondary: #3dc2ff;
+  --ion-color-secondary-rgb: 61, 194, 255;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #36abe0;
+  --ion-color-secondary-tint: #50c8ff;
+
+  --ion-color-success: #2dd36f;
+  --ion-color-success-rgb: 45, 211, 111;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #28ba62;
+  --ion-color-success-tint: #42d77d;
+
+  --ion-color-dark: #222428;
+  --ion-color-dark-rgb: 34, 36, 40;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #1e2023;
+  --ion-color-dark-tint: #383a3e;
+
+  --ion-color-medium: #92949c;
+  --ion-color-medium-rgb: 146, 148, 156;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #808289;
+  --ion-color-medium-tint: #9d9fa6;
+}
+
+ion-content {
+  --background: #f5f7fa;
+}
+
+.mensaje-contextual {
+  display: flex;
+  align-items: center;
+  background: rgba(var(--ion-color-primary-rgb), 0.1);
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  
+  ion-icon {
+    margin-right: 10px;
+    font-size: 1.2rem;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--ion-color-dark);
+  }
+}
+
+.flight-results {
+  .section-title {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: var(--ion-color-dark);
+    margin-bottom: 20px;
+    
+    ion-icon {
+      margin-right: 10px;
+      color: var(--ion-color-primary);
+    }
+  }
+}
+
+.flight-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.flight-card {
+  margin: 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(var(--ion-color-primary-rgb), 0.1) 0%, rgba(var(--ion-color-secondary-rgb), 0.1) 100%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.route {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  
+  .city {
+    font-weight: 600;
+    font-size: 1.1rem;
+    
+    &.origin {
+      color: var(--ion-color-primary);
+    }
+    
+    &.destination {
+      color: var(--ion-color-dark);
+    }
+  }
+  
+  .flight-icon {
+    margin: 0 12px;
+    
+    ion-icon {
+      color: var(--ion-color-primary);
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.flight-type {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: rgba(var(--ion-color-primary-rgb), 0.1);
+  color: var(--ion-color-primary);
+  
+  ion-icon {
+    margin-right: 5px;
+    font-size: 0.9rem;
+  }
+  
+  &.round-trip {
+    background: rgba(var(--ion-color-success-rgb), 0.1);
+    color: var(--ion-color-success);
+  }
+}
+
+.flight-details {
+  display: flex;
+  padding: 16px;
+  
+  .dates {
+    display: flex;
+    flex-grow: 1;
+    gap: 20px;
+  }
+  
+  .date-item {
+    display: flex;
+    flex-direction: column;
+    
+    .label {
+      font-size: 0.7rem;
+      color: var(--ion-color-medium);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .date {
+      font-weight: 600;
+      color: var(--ion-color-dark);
+      margin-bottom: 2px;
+    }
+    
+    .time {
+      font-size: 0.9rem;
+      color: var(--ion-color-medium);
+    }
+    
+    &.departure .date {
+      color: var(--ion-color-primary);
+    }
+  }
+  
+  .price-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    min-width: 100px;
+    
+    .price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--ion-color-primary);
+    }
+    
+    ion-button {
+      --padding-top: 8px;
+      --padding-bottom: 8px;
+      --padding-start: 12px;
+      --padding-end: 12px;
+      height: auto;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+  }
+}
+
+.no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  
+  .illustration {
+    margin-bottom: 20px;
+    
+    ion-icon {
+      font-size: 3.5rem;
+      color: var(--ion-color-medium);
+      opacity: 0.3;
+    }
+  }
+  
+  h3 {
+    font-size: 1.3rem;
+    color: var(--ion-color-dark);
+    margin-bottom: 8px;
+  }
+  
+  p {
+    color: var(--ion-color-medium);
+    margin-bottom: 20px;
+    max-width: 80%;
+  }
+  
+  ion-button {
+    max-width: 200px;
+  }
+}
